@@ -37,6 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'users',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth',
+    'rest_auth.registration',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +128,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Custom User Model
+AUTH_USER_MODEL = "users.CustomUser"
+
+# Django Crispy Forms
+CRISPY_TEMPLATE_PACK = "bootrap4"
+
+# django.contrib.sites
+SITE_ID = 1
+
+#django.allauth
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = (True)
