@@ -14,7 +14,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         exclude = ['question', 'voters', 'updated_at']
 
     def get_created_at(self, instance):
-        return instance.created_at.strftime('%B %d %Y')
+        return instance.created_at.strftime('%B %d, %Y')
 
     def get_likes_count(self, instance):
         return instance.voters.count()
@@ -24,7 +24,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         return instance.voters.filter(pk=request.user.pk).exists()
 
 
-class QuestionSerializer(serializer.ModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     created_at = serializers.SerializerMethodField()
     slug = serializers.SlugField(read_only=True)
@@ -36,7 +36,7 @@ class QuestionSerializer(serializer.ModelSerializer):
         exclude = ['updated_at']
 
     def get_created_at(self, instance):
-        return instance.created_at.strftime('%B %d %Y')
+        return instance.created_at.strftime('%B %d, %Y')
 
     def get_answers_count(self, instance):
         return instance.answers.count()

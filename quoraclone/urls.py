@@ -50,6 +50,9 @@ urlpatterns = [
     path('api/',
         include('users.api.urls')),
 
+    path('api/',
+        include('questions.api.urls')),
+
     # Login via REST
     path('api/rest-auth.',
         include('rest_auth.urls')),
