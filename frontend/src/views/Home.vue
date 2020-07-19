@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Quora Clone"/>
+    <HelloWorld msg="Quora Clone !!!"/>
   </div>
 </template>
 
