@@ -1,5 +1,31 @@
 <template>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-between my-navbar">
+        
+        <div class="navbar-brand active">
+            <router-link
+                :to="{ name: 'home' }"
+                class="title-home"
+            >Quora Clone
+            </router-link>
+        </div>
 
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <div class="nav-item nav-link">
+                    <router-link
+                        :to="{ name: 'about' }"
+                        class="other-links"
+                    >About
+                    </router-link>
+                </div>
+                 <div class="nav-item nav-link">
+                    <a class="other-links" href="/accounts/logout/"
+                    >Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </template>
 
 <script>
@@ -9,14 +35,17 @@ export default {
 </script>
 
 <style>
-.my-navbar {
-  border-bottom: 1px solid #ddd;
-}
-.navbar-brand {
-  font-weight: bold;
-  font-size: 130%;
-}
-.navbar-brand:hover {
-  color: #dc3545 !important;
-}
+    .my-navbar {
+        border-bottom: 1px solid #DDD
+    }
+
+    .title-home {
+        font-size: 125%;
+        color: teal;
+    }
+
+    .other-links {
+        font-size: 125%;
+        color: grey;
+    }
 </style>

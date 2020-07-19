@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Quora Clone !!!"/>
+    <div class="container">
+        <HelloWorld msg="Quora Clone !!!"/>
+    </div>
   </div>
 </template>
 
@@ -9,7 +11,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Home",
+  name: "home",
   components: {
     HelloWorld
   }
