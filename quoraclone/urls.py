@@ -47,6 +47,9 @@ urlpatterns = [
     path('api-auth/',
         include('rest_framework.urls')),
 
+    path('api/',
+        include('users.api.urls')),
+
     # Login via REST
     path('api/rest-auth.',
         include('rest_auth.urls')),
