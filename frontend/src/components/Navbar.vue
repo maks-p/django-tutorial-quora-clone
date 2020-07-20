@@ -41,7 +41,7 @@ export default {
 
     .title-home {
         font-size: 125%;
-        color: teal;
+        color: #42b983;
     }
 
     .other-links {
