@@ -10,7 +10,7 @@ const apiService = (endpoint, method, data) => {
 		method: method || GET,
 		body: data !== undefined ? JSON.stringify(data) : null,
 		headers: {
-			"content-type": "applicaiton/json",
+			"content-type": "application/json",
 			"X-CSRFTOKEN": CSRF_TOKEN,
 		},
 	};
