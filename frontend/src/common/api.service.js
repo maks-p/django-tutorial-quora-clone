@@ -1,13 +1,13 @@
 import { CSRF_TOKEN } from "./csrf_token.js";
 
-const getJSON = async (response) => {
+const getJSON = async response => {
 	if (response.status === 204) return "";
 	return response.json();
 };
 
 const apiService = (endpoint, method, data) => {
 	const config = {
-		method: method || GET,
+		method: method || 'GET',
 		body: data !== undefined ? JSON.stringify(data) : null,
 		headers: {
 			"content-type": "application/json",
