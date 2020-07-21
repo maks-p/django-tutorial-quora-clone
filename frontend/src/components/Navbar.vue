@@ -13,6 +13,13 @@
             <div class="navbar-nav">
                 <div class="nav-item nav-link">
                     <router-link
+                        :to="{ name: 'question-editor' }"
+                        class="ask-link"
+                    >Ask Question
+                    </router-link>
+                </div>
+                <div class="nav-item nav-link">
+                    <router-link
                         :to="{ name: 'about' }"
                         class="other-links"
                     >About
@@ -44,8 +51,21 @@ export default {
         color: #42b983;
     }
 
+    .nav-link {
+        font-size: 125%
+    }
+
     .other-links {
-        font-size: 125%;
         color: grey;
     }
+
+    .ask-link {
+        color: rgb(199, 53, 199)
+    }
+
+    .ask-link:hover {
+        color: rgb(168, 76, 189);
+        text-decoration: none;
+    }
+
 </style>
