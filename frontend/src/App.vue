@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import NavbarComponent from "./components/Navbar.vue"
+import NavbarComponent from "@/components/Navbar.vue"
 export default {
     name: "App",
     components: {
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
- html, body {
+    html, body {
         height: 100%;
         font-family: 'Roboto Mono', monospace;
     }

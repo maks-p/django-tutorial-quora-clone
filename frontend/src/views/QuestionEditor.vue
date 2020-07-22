@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
+import { apiService } from "@/common/api.service.js";
 export default {
 	name: "QuestionEditor",
 	data() {
@@ -50,3 +50,12 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+    .btn-success {
+            background-color: white;
+            border: 2px solid teal;
+            color: teal;
+            font-weight: bold;
+        }
+</style>

@@ -8,7 +8,7 @@
 						question.author
 					}}</span>
 				</p>
-				<h2>
+				<h3>
 					<router-link
 						:to="{
 							name: 'question',
@@ -17,7 +17,7 @@
 						class="question-link"
 						>{{ question.content }}
 					</router-link>
-				</h2>
+				</h3>
 				<p>Answers: {{ question.answers_count }}</p>
 				<hr />
 			</div>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js";
+import { apiService } from "@/common/api.service.js";
 
 export default {
 	name: "home",
