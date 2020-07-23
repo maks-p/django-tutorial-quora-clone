@@ -1,22 +1,18 @@
 <template>
   <div class="single-answer">
     <p class="text-muted">
-      <strong>{{ answer.author }}</strong> &#8901; {{ answer.created_at }}
+      <strong>{{ answer.author }}</strong>
+      &#8901; {{ answer.created_at }}
     </p>
     <p>{{ answer.body }}</p>
     <div v-if="isAnswerAuthor">
       <router-link
         :to="{ name: 'answer-editor', params: { id: answer.id } }"
         class="btn btn-sm btn-outline-secondary mr-1"
-        >Edit
-      </router-link>
-      <button
-        class="btn btn-sm btn-outline-danger"
-        @click="triggerDeleteAnswer"
-        >Delete
-      </button>
+      >Edit</router-link>
+      <button class="btn btn-sm btn-outline-danger" @click="triggerDeleteAnswer">Delete</button>
     </div>
-    <div v-else>      
+    <div v-else>
       <button
         class="btn btn-sm"
         @click="toggleLike"
@@ -24,10 +20,11 @@
           'btn-danger shadow-none': userLikedAnswer,
           'btn-outline-danger shadow-none': !userLikedAnswer
           }"
-        ><strong>Likes -> {{ likesCounter }}</strong>
+      >
+        <strong>Likes -> {{ likesCounter }}</strong>
       </button>
     </div>
-    <hr>
+    <hr />
   </div>
 </template>
 
@@ -49,7 +46,7 @@ export default {
     return {
       userLikedAnswer: this.answer.user_has_voted,
       likesCounter: this.answer.likes_count
-    }
+    };
   },
   computed: {
     isAnswerAuthor() {
@@ -59,35 +56,30 @@ export default {
   },
   methods: {
     toggleLike() {
-      this.userLikedAnswer === false
-        ? this.likeAnswer()
-        : this.unLikeAnswer()
+      this.userLikedAnswer === false ? this.likeAnswer() : this.unLikeAnswer();
     },
     likeAnswer() {
       this.userLikedAnswer = true;
       this.likesCounter += 1;
-      let endpoint = `/api/answers/${ this.answer.id }/like/`;
-      apiService(endpoint, "POST")
+      let endpoint = `/api/answers/${this.answer.id}/like/`;
+      apiService(endpoint, "POST");
     },
     unLikeAnswer() {
       this.userLikedAnswer = false;
       this.likesCounter -= 1;
-      let endpoint = `/api/answers/${ this.answer.id }/like/`;
-      apiService(endpoint, "DELETE")
+      let endpoint = `/api/answers/${this.answer.id}/like/`;
+      apiService(endpoint, "DELETE");
     },
     triggerDeleteAnswer() {
       // emit an event to delete an answer instance
-      this.$emit("delete-answer", this.answer)
+      this.$emit("delete-answer", this.answer);
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
-    .btn-outline {
-        border: teal
-    }
-
-
+.btn-outline {
+  border: teal;
+}
 </style>

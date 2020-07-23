@@ -47,19 +47,20 @@ export default {
     let data = await apiService(endpoint);
     // to.params.previousAnswer = data.body;
     // to.params.questionSlug = data.question_slug;
-    return next(vm => (
-        vm.answerBody = data.body,
-        vm.questionSlug = data.question_slug
-    ));
+    return next(
+      vm => (
+        (vm.answerBody = data.body), (vm.questionSlug = data.question_slug)
+      )
+    );
   }
 };
 </script>
 
 <style scoped>
 .btn-success {
-        background-color: white;
-        border: 2px solid teal;
-        color: teal;
-        font-weight: bold;
-    }
+  background-color: white;
+  border: 2px solid teal;
+  color: teal;
+  font-weight: bold;
+}
 </style>
