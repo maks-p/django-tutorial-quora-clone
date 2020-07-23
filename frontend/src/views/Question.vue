@@ -1,7 +1,12 @@
 <template>
     <div class="single-question mt-2">
-        <div class="container">
+        <div v-if="question" class="container">
             <h1>{{ question.content }}</h1>
+                <QuestionActions
+                    v-if='isQuestionAuthor'
+                    :slug='question.slug'
+                    class="mt-2 mb-2"
+                />
                 <p class="mb-0">Posted by:
                     <span class="author-name">{{ question.author }}</span>
                 </p>
@@ -42,11 +47,16 @@
                 </div>
                 <hr>
         </div>
-        <div class="container">
+        <div v-else>
+            <h1 id="notfound">404 - Question Not Found</h1>
+        </div>
+        <div v-if="question" class="container">
             <AnswerComponent 
                 v-for="(answer, index) in answers"
                 :answer="answer"
+                :requestUser = "requestUser"
                 :key="index"
+                @delete-answer="deleteAnswer"
             />
         <div class="my-4">
 				<p v-show="loadingAnswers">...loading...</p>
@@ -65,6 +75,7 @@
 <script>
 import { apiService } from '@/common/api.service.js'
 import AnswerComponent from '@/components/Answer.vue'
+import QuestionActions from '@/components/QuestionActions.vue'
 
 export default {
     name: "Question",
@@ -75,33 +86,51 @@ export default {
         }
     },
     components: {
-        AnswerComponent
+        AnswerComponent,
+        QuestionActions
     },
     data() {
         return {
             question: {},
             answers: [],
+            next: null,
+            loadingAnswers: false,
             newAnswerBody: null,
             error: null,
             userHasAnswered: false,
             showForm: false,
-            next: null,
-            loadingAnswers: false
+            requestUser: null
+        }
+    },
+    computed: {
+        isQuestionAuthor() {
+            return this.question.author === this.requestUser;
         }
     },
     methods: {
         setPageTitle(title) {
             document.title = title;
         },
+
+        setRequestUser() {
+            this.requestUser = window.localStorage.getItem('username');
+        },
+
         getQuestionData() {
             let endpoint = `/api/questions/${this.slug}/`;
             apiService(endpoint)
                 .then(data => {
-                    this.question = data;
-                    this.userHasAnswered = data.user_has_answered;
-                    this.setPageTitle(data.content);
+                    if (data) {
+                        this.question = data;
+                        this.userHasAnswered = data.user_has_answered;
+                        this.setPageTitle(data.content);
+                    } else {
+                        this.question = null;
+                        this.setPageTitle("404 - Page Not Found")
+                    }
                 })
         },
+
         getQuestionAnswers() {
             let endpoint = `/api/questions/${this.slug}/answers/`;
             if (this.next) {
@@ -119,6 +148,7 @@ export default {
                     }
                     })
         },
+
         onSubmit() {
             if (this.newAnswerBody) {
                 let endpoint = `/api/questions/${this.slug}/answer/`
@@ -135,11 +165,25 @@ export default {
             } else {
                 this.error = "You can't send an empty answer!"
             }
+        },
+
+        async deleteAnswer(answer) {
+            let endpoint = `/api/answers/${answer.id}/`;
+            try {
+                await apiService(endpoint, "DELETE")
+                this.$delete(this.answers, this.answers.indexOf(answer))
+                this.userHasAnswered = false;
+                }
+            catch (err) {
+                console.log(err)
+                }
         }
+
     },
     created() {
         this.getQuestionData();
         this.getQuestionAnswers();
+        this.setRequestUser();
     }   
 }
 </script>
